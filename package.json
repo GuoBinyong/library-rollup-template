@@ -1,0 +1,47 @@
+{
+  "name": "library-rollup-template",
+  "version": "0.0.0",
+  "description": "library-rollup-template 称为 库构建模板，又称 公共代码构建模板 ，是专门用于构建 公共代码（如：封装的库、工具等） 的 rollup 配置模板，当需要开发和构建公共代码时，直接克隆本项目即可，并默认在的 src 目录下开发即可；",
+  "main": "dist/library-rollup-template.cjs.js",
+  "module": "dist/library-rollup-template.es.js",
+  "types": "types/index.d.ts",
+  "sideEffects": false,
+  "homepage": "https://github.com/GuoBinyong/library-rollup-template#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuoBinyong/library-rollup-template"
+  },
+  "keywords": [
+    "前端库",
+    "web库",
+    "library",
+    "rollup 模板",
+    "公共代码"
+  ],
+  "author": {
+    "name": "郭斌勇",
+    "email": "guobinyong@qq.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/[^.]*",
+    "types/[^.]*",
+    "docs/[^.]*",
+    "doc/[^.]*"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "eslint": "^7.15.0",
+    "package-tls": "^1.0.3",
+    "path": "^0.12.7",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}
