@@ -44,7 +44,7 @@ description: ${pkg.description}
 	// 要插入到生成文件底部的字段串；
 	// footer:"",
 
-	// 输出文件的存放目录；只用于会生成多个 chunks 的时候 
+	// 输出文件的存放目录；只用于会生成多个 chunks 的时候
 	dir:"./",
 	// 生成 chunks 名字的格式
 	entryFileNames:`${outputDir}/${removeScope(pkg.name)}.[format].js`
@@ -72,6 +72,19 @@ const presets = [
 const pluginTransformRuntime = ['@babel/plugin-transform-runtime', {useESModules: false, corejs: { version: 3 }}];
 
 const plugins = [
+	// Stage 2
+	["@babel/plugin-proposal-decorators", { "legacy": false, "decoratorsBeforeExport": true }],
+	"@babel/plugin-proposal-function-sent",
+	"@babel/plugin-proposal-export-namespace-from",
+	"@babel/plugin-proposal-numeric-separator",
+	"@babel/plugin-proposal-throw-expressions",
+
+	// Stage 3
+	"@babel/plugin-syntax-dynamic-import",
+	"@babel/plugin-syntax-import-meta",
+	["@babel/plugin-proposal-class-properties", { "loose": true }],
+	"@babel/plugin-proposal-json-strings",
+
 	pluginTransformRuntime
 ];
 
@@ -170,7 +183,7 @@ export default [
 	*/
 	{
 		...shareConf,
-        external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
+		external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
 		output: {
 			...shareOutput,
 			format: 'iife',
