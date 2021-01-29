@@ -1,6 +1,7 @@
 import {removeScope,getBaseNameOfHumpFormat,getDependencieNames} from "package-tls";
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import { terser } from "rollup-plugin-terser";
 import {dirname} from "path"
 import pkg from './package.json';
@@ -75,6 +76,7 @@ const shareConf = {
 			*/
 			extensions:extensions
 		}),
+		json(), //将 json 文件转为 ES6 模块
 		commonjs(), // 将依赖的模块从 CommonJS 模块规范转换成 ES2015 模块规范
 	]
 };
