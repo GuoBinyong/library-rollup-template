@@ -25,7 +25,7 @@ Object.prototype.toString = function(){return JSON.stringify(this,null,2)};
 const input = 'src/index.ts';   // 输入（入口）文件
 const outputDir = dirname(pkg.main || "dist/*");    //输出目录
 const pkgName = getBaseNameOfHumpFormat(pkg.name);  //驼峰格式的 pkg.name
-const extensions = ['.tsx', '.ts','.jsx', '.mjs', '.js', '.json'];  // 默认查找的文件扩展名
+const extensions = ['.tsx', '.ts','.jsx','.mjs', '.js', '.json','.node'];  // 默认查找的文件扩展名
 
 
 // rollup 中共用的 output 选项
