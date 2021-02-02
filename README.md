@@ -95,7 +95,7 @@ ts/   # 针对 TypeScript 开发环境的配置模板 都放在这个路径下
   ├── common    # 所有 TypeScript 开发环境配置模板的 公共配置；不能用作公共代码的构建模板；基于 common 分支创建；
   ├── babel    # 用 babel 作为 编译器的配置模板；基于 ts/common 分支创建；
   ├── tsc    # 用 TypeScript编译器 作为 编译器的配置模板；基于 ts/common 分支创建；
-  └── tsc-babel   # 用 TypeScript编译器 编译后 再经过 babel编译器 进行编译 的配置模板；基于 ts/common 分支创建；
+  └── tsc-babel   # 用 TypeScript编译器 编译后 再经过 babel编译器 进行编译 的配置模板；基于 ts/tsc 分支创建；
 ```
 
 
