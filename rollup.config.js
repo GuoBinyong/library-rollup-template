@@ -21,7 +21,7 @@ import pkg from './package.json';
 共用的配置
 */
 
-const input = 'src/index';   // 输入（入口）文件
+const input = 'src/index.js';   // 输入（入口）文件
 const outputDir = dirname(pkg.main || "dist/*");    //输出目录
 const pkgName = getBaseNameOfHumpFormat(pkg.name);  //驼峰格式的 pkg.name
 const extensions = ['.tsx', '.ts','.jsx','.mjs', '.js', '.json','.node'];  // 默认查找的文件扩展名
