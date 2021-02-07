@@ -6,6 +6,8 @@ import { terser } from "rollup-plugin-terser";
 import {dirname} from "path"
 import pkg from './package.json';
 
+import tsconfig from "./tsconfig.json";
+import typescript from '@rollup/plugin-typescript';
 import babel from '@rollup/plugin-babel';
 
 
@@ -55,12 +57,9 @@ description: ${pkg.description}
 
 
 
-
-
 // 预设
 const presets = [
-	'@babel/preset-env',
-	'@babel/preset-typescript'
+	'@babel/preset-env'
 ];
 
 // 插件
@@ -101,7 +100,6 @@ const babelConf = {
 };
 
 
-
 // 共用的 rollup 配置
 const shareConf = {
 	input: input,
@@ -124,9 +122,16 @@ const shareConf = {
 		}),
 		json(), //将 json 文件转为 ES6 模块
 		commonjs(), // 将依赖的模块从 CommonJS 模块规范转换成 ES2015 模块规范
+		typescript({
+			// 如果 tsconfig 中的 declarationDir 没有定义，则优先使用 package.json 中的 types 或 typings 定义的目录， 默认值：outputDir
+			declarationDir: tsconfig.declarationDir || dirname(pkg.types || pkg.typings || (outputDir+"/*")),
+			// 用来给 输出目录 outDir 提供源文件目录结构的，以便生成的文件中的导入导出能够正确地访问；
+			rootDir: dirname(input),
+		}),  // 将 TypeScript 转换为 JavaScript
 		babel(babelConf)
 	]
 };
+
 
 
 // 导出的 rollup 配置
