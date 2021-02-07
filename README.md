@@ -102,14 +102,14 @@ js/      # 针对 JavaScript 开发环境的配置模板 都放在这个分支�
 ts/      # 针对 TypeScript 开发环境的配置模板 都放在这个分支路径下
   ├── common    # 所有 TypeScript 开发环境配置模板的 公共配置；不能用作公共代码的构建模板；基于 common 分支创建；
   ├── tsc    # 用 TypeScript编译器 作为 编译器的配置模板；基于 ts/common 分支创建；
-  └── ts&js/   # 针对 TypeScript 和 JavaScript 混合开发环境的配置模板 都放在这个分支路径下；即：项目中即有 TypeScript 代码，又有 JavaScript 代码；即可用于纯 TypeScript 项目，也可用于 混合开发项目；
+  └── ts-js/   # 针对 TypeScript 和 JavaScript 混合开发环境的配置模板 都放在这个分支路径下；即：项目中即有 TypeScript 代码，又有 JavaScript 代码；即可用于纯 TypeScript 项目，也可用于 混合开发项目；
         ├── common    # 所有混合开发环境配置模板的 公共配置；不能用作公共代码的构建模板；基于 ts/common 分支创建；
-        ├── babel    # 用 babel 作为 编译器的配置模板；基于 ts/ts&js/common 分支创建；
-        └── tsc-babel   # 用 TypeScript编译器 编译后 再经过 babel编译器 进行编译 的配置模板；基于 ts/ts&js/babel 分支创建；
+        ├── babel    # 用 babel 作为 编译器的配置模板；基于 ts/ts-js/common 分支创建；
+        └── tsc-babel   # 用 TypeScript编译器 编译后 再经过 babel编译器 进行编译 的配置模板；基于 ts/ts-js/babel 分支创建；
 ```
 
 **说明：**  
-`ts/ts&js/` 分支路径下都是 针对 TypeScript 和 JavaScript 混合开发环境的配置模板；混合开发环境一般常见于 JavaScript 旧项目，但新的模块需要使用 TypeScript 进行开发的场景；
+`ts/ts-js/` 分支路径下都是 针对 TypeScript 和 JavaScript 混合开发环境的配置模板；混合开发环境一般常见于 JavaScript 旧项目，但新的模块需要使用 TypeScript 进行开发的场景；
 
 若想能让 TypeScript 文件能够更加准确感知 JavaScript 文件的类型，你可以为 JavaScript 文件书写类型声明文件(即：后缀为 `.d.ts` 的文件)；默认配置是建义你将 JavaScript 的 类型声明文件`.d.ts` 都放在 `types/` 目录下；
 
