@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import {dirname} from "path"
 import pkg from './package.json';
 
+import buble from '@rollup/plugin-buble';
 
 
 // 配置 ---------------------------------
@@ -43,14 +44,11 @@ description: ${pkg.description}
 	// 要插入到生成文件底部的字段串；
 	// footer:"",
 
-	// 输出文件的存放目录；只用于会生成多个 chunks 的时候 
+	// 输出文件的存放目录；只用于会生成多个 chunks 的时候
 	dir:"./",
 	// 生成 chunks 名字的格式
 	entryFileNames:`${outputDir}/${removeScope(pkg.name)}.[format].js`
 };
-
-
-
 
 
 
@@ -77,6 +75,9 @@ const shareConf = {
 		}),
 		json(), //将 json 文件转为 ES6 模块
 		commonjs(), // 将依赖的模块从 CommonJS 模块规范转换成 ES2015 模块规范
+		buble({  // 把代码从 ES2015+ 转成 ES5
+			exclude: ['node_modules/**']
+		})
 	]
 };
 
@@ -92,6 +93,7 @@ export default [
 	{
 		...shareConf,
 		output: [
+			{...shareOutput, format: 'es' },  // ES module
 			{...shareOutput, format: 'cjs' }, // CommonJS
 			{...shareOutput, format: 'amd' }, // amd
 			/*
@@ -117,7 +119,7 @@ export default [
 	*/
 	{
 		...shareConf,
-        external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
+		external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
 		output: {
 			...shareOutput,
 			format: 'iife',
