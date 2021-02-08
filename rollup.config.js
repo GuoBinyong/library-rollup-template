@@ -6,6 +6,7 @@ import { terser } from "rollup-plugin-terser";
 import {dirname} from "path"
 import pkg from './package.json';
 
+import tsconfig from "./tsconfig.json";
 
 
 // 配置 ---------------------------------
@@ -21,7 +22,7 @@ import pkg from './package.json';
 共用的配置
 */
 
-const input = 'src/index';   // 输入（入口）文件
+const input = 'src/index.ts';   // 输入（入口）文件
 const outputDir = dirname(pkg.main || "dist/*");    //输出目录
 const pkgName = getBaseNameOfHumpFormat(pkg.name);  //驼峰格式的 pkg.name
 const extensions = ['.tsx', '.ts','.jsx','.mjs', '.js', '.json','.node'];  // 默认查找的文件扩展名
@@ -43,15 +44,11 @@ description: ${pkg.description}
 	// 要插入到生成文件底部的字段串；
 	// footer:"",
 
-	// 输出文件的存放目录；只用于会生成多个 chunks 的时候 
+	// 输出文件的存放目录；只用于会生成多个 chunks 的时候
 	dir:"./",
 	// 生成 chunks 名字的格式
 	entryFileNames:`${outputDir}/${removeScope(pkg.name)}.[format].js`
 };
-
-
-
-
 
 
 
@@ -81,6 +78,7 @@ const shareConf = {
 };
 
 
+
 // 导出的 rollup 配置
 export default [
 	/*
@@ -92,6 +90,7 @@ export default [
 	{
 		...shareConf,
 		output: [
+			{...shareOutput, format: 'es' },  // ES module
 			{...shareOutput, format: 'cjs' }, // CommonJS
 			{...shareOutput, format: 'amd' }, // amd
 			/*
@@ -117,7 +116,7 @@ export default [
 	*/
 	{
 		...shareConf,
-        external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
+		external:getDependencieNames(pkg,"peerDependencies"),   //只移除 peerDependencies 中的依赖
 		output: {
 			...shareOutput,
 			format: 'iife',
